@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { categories } from "../data/categories";
 import type { Activity } from "../types";
 
@@ -18,6 +18,13 @@ export default function Form() {
       ...activity,
       [e.target.id]: isNumberFiel ? +e.target.value : e.target.value
     })
+  }
+
+  const isValidActivity =() => {
+    const {name, calorias} = activity
+    return (
+      name.trim() !== '' && calorias > 0
+    )
   }
 
   return (
@@ -66,8 +73,9 @@ export default function Form() {
               </div>
 
               <input type="submit"
-              className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
-              value={'Guardar Comida o Guardar Ejercicio'}
+              className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10"
+              value={activity.category === 1 ? 'Guardar Comida' : 'Guardar Ejercicio'}
+              disabled={!isValidActivity()}
               />
                 
         </div>
