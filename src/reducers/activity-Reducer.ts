@@ -3,8 +3,9 @@ import type { Activity } from "../types"
 
 
 export type ActivityActions = 
-    {type: 'Save-activity', payload: {newActivity: Activity}} |
-    {type: 'Set-activeId', payload: {id: Activity['id']}}
+    {type: 'save-activity', payload: {newActivity: Activity}} |
+    {type: 'set-activeId', payload: {id: Activity['id']}} |
+    {type: 'deleted-activity', payload: {id: Activity['id']}}
 
 
 export type ActivityState ={
@@ -21,7 +22,7 @@ export const activityReducer = (
     action: ActivityActions
 ) => {
 
-    if (action.type === 'Save-activity') {
+    if (action.type === 'save-activity') {
         
         let updatedActivities: Activity[] = []
         if (state.activeId){
@@ -38,11 +39,23 @@ export const activityReducer = (
      }
     }
 
-    if (action.type === 'Set-activeId') {
+    if (action.type === 'set-activeId') {
         return{
             ...state,
             activeId: action.payload.id
         }
      }
+    
+
+    if (action.type === 'deleted-activity'){
+
+        console.log('clik en eliminar...')
+        return{
+           ...state,
+            activities: state.activities.filter(activity => activity.id !== action.payload.id)
+        }
+    }
+
+
     return state
 }

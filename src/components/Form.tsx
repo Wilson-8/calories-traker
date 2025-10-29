@@ -49,7 +49,7 @@ export default function Form({dispatch, state}: FormProps) {
 
   const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch({type: "Save-activity", payload: {newActivity: activity}})
+    dispatch({type: "save-activity", payload: {newActivity: activity}})
 
     setActivity({
       ...initialState,
