@@ -1,7 +1,10 @@
 import Form from "./components/Form"
+import {useReducer} from "react"
+import { activityReducer, initialState } from "./reducers/activity-Reducer"
 
 function App() {
   
+  const [state, dispatch] = useReducer (activityReducer, initialState)
 
   return (
     <>
@@ -19,7 +22,9 @@ function App() {
 
         <p>Formulario a qui</p>
 
-        <Form/>
+        <Form
+        dispatch={dispatch}
+        />
       </div>
 
 
